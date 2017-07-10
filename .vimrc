@@ -1,4 +1,3 @@
-
 " An example for a vimrc file.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
@@ -47,6 +46,10 @@ inoremap <C-U> <C-G>u<C-U>
 if has('mouse')
   set mouse=a
 endif
+
+execute pathogen#infect()
+call pathogen#helptags()
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -106,15 +109,29 @@ set ignorecase
 
 
 nnoremap + $
-filetype plugin on
-execute pathogen#infect()
-call pathogen#helptags()
 
 " Markdown-relaterat
 set shell=/bin/bash
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 "Easier write/quit
-nmap q :x<cr>
-
 nmap <SPACE> i 
+
+set dir=~/.vimswap//,/var/tmp//,/tmp//,.
+
+
+"Javascript
+imap <C-c> <CR><Esc>O
+
+"http://blog.sudoask.com/setup-ternjs-node-javascript-autocomplete-plugin-for-vim-editor/
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
+set completeopt-=preview 
+
+set t_Co=256
+set background=dark
+colorscheme desert
+set relativenumber
+" don't highlight parenthesis
+let loaded_matchparen = 1
+" map § to save file
+nmap § :w<CR>
